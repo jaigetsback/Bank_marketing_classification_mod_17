@@ -1,0 +1,90 @@
+Bank Marketing & Classification Models
+Objective:
+The goal of this project is to compare the performance of four classifiers—K Nearest Neighbor (KNN), Logistic Regression, Decision Trees, and Support Vector Machines (SVM)—using a dataset related to marketing bank products over the telephone. The dataset is sourced from the UCI Machine Learning repository and pertains to direct marketing campaigns conducted by a Portuguese banking institution.
+
+Data Overview:
+Source: UCI Machine Learning repository
+Period: May 2008 to November 2010
+Total Contacts: 79,354
+Successes: 6,499 (8% success rate)
+Attributes:
+Various features related to customer demographics and campaign details
+
+Class Imbalance: Approximately 90:10 split between the two classes (success vs. no success)
+Key Insights:
+Customer Demographics:
+Top professions: Administration, blue-collar jobs, and technicians
+Majority are married
+Most do not have a default
+Many have housing loans, few have personal loans
+Preferred contact method: Cell phone
+High contact frequency in May and preference for Thursday
+Data Characteristics:
+No missing values, but some categorical data needs encoding
+Class imbalance needs addressing to avoid bias
+Features like pdays and previous have low variance and can be dropped
+Skewed features: Age, duration, and campaign due to outliers
+Methodology:
+Following the CRISP-DM framework:
+
+Business Understanding: Define objectives and requirements
+Data Understanding: Collect initial data, describe data, explore data, verify data quality
+Data Preparation: Clean data, handle class imbalance, encode categorical variables, drop low-variance features, remove outliers
+Modeling: Apply classifiers (KNN, Logistic Regression, Decision Trees, SVM) and perform hyperparameter tuning using GridSearchCV
+Evaluation: Compare model performance using metrics like train score, test score, precision, recall, F1 score, and accuracy
+Feature Selection:
+Age:
+
+Coefficient of Variation: High, with a mean close to 40 years.
+Correlation with Outcome: No clear conclusion yet. It might be useful to perform further statistical tests or visualizations (e.g., scatter plots, correlation matrices) to determine if there’s a significant relationship between age and the outcome.
+Duration:
+
+Coefficient of Variation: High, with a mean close to 258.3.
+Correlation with Outcome: Shows correlation, but needs verification. Duration often correlates with the outcome in marketing datasets because longer calls might indicate more engaged customers. You could use techniques like logistic regression coefficients or feature importance from tree-based models to verify this correlation.
+Default: No significant correlation with the outcome (Y).
+
+Loan: No significant correlation with the outcome (Y).
+
+Housing: While not directly correlated with the outcome, it shows a higher probability of occurrence among the dataset.
+
+pdays and previous consist of a single value and their variance is low. They can be dropped as they do not alter the outcome prediction.
+
+Outlier Analysis:
+Heuristically fixing the "age" and "duration" outliers as well as label encoding all the categorical variables as needed.
+Using standard scaler for the encoding to mitigate high variance
+Test-Train Split:
+Used a 70/30 randomized test-train split with the stratification on classes to account for the "y" outcomes
+Performance Comparison:
+Baseline Score: Generated using a Dummy Classifier
+Was around 89% on the training set
+Model scores with default setting
+
+Logistic Regression: Best overall with the highest accuracy (91%) and good balance of precision and recall.
+K-Nearest Neighbors (KNN): Also strong with 90% accuracy and very fast to train.
+Support Vector Classifier (SVC): Decent accuracy (89%) but takes a long time to train.
+Decision Tree: Balanced performance with 89% accuracy and moderate training time.
+Inference: Logistic Regression is the top choice for accuracy, while KNN is great for quick training. This was also validated with the ROC analysis.
+
+Model Scores After Hyperparameter Tuning:
+
+Logistic Regression: Train score 0.905, Test score 0.906, Precision 0.892, Recall 0.906, F1 Score 0.893, Accuracy 91.0%
+K-Nearest Neighbors (KNN): Train score 0.897, Test score 0.900, Precision 0.887, Recall 0.900, F1 Score 0.891, Accuracy 90.0%
+Support Vector Classifier (SVC): Train score 0.887, Test score 0.887, Precision 0.787, Recall 0.887, F1 Score 0.834, Accuracy 89.0%
+Decision Tree: Train score 0.899, Test score 0.905, Precision 0.893, Recall 0.905, F1 Score 0.896, Accuracy 91.0%
+Conclusion
+
+After removing outliers and performing hyperparameter tuning, both Logistic Regression and Decision Trees showed the highest accuracy at 91.0%. Logistic Regression remains a strong performer with balanced precision and recall, while Decision Trees also demonstrated robust performance.
+
+GITLAB Link to notebook
+------------------------
+
+The notebook is in https://github.com/jaigetsback/Bank_marketing_classification_mod_17
+-- DM_BANK_mod_17.ipynb
+
+The data for the analysis is in
+-- https://github.com/jaigetsback/Bank_marketing_classification_mod_17/data/bank-additional-full.csv
+
+
+
+
+
